@@ -1,4 +1,4 @@
-package Classes;
+package petrinet;
 
 public class Arc {
 	

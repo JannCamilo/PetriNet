@@ -1,4 +1,4 @@
-package Classes;
+package petrinet;
 
 import java.util.List;
 

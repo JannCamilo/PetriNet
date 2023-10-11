@@ -1,8 +1,6 @@
-package Classes;
+package petrinet;
 
 import java.util.List;
-
-import Interfaces.IPetriNetwork;
 
 public class PetriNetwork implements IPetriNetwork{
 	

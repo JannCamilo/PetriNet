@@ -1,8 +1,4 @@
-package Interfaces;
-
-import Classes.Arc;
-import Classes.Place;
-import Classes.Transition;
+package petrinet;
 
 public interface IPetriNetwork {	
 	
