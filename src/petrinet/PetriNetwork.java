@@ -127,6 +127,7 @@ public class PetriNetwork implements IPetriNetwork {
 	
 	/**
 	 * Sets the list of arcs in the Petri network.
+	 * @param arcs set the arcs inside the Petri Network.
 	 */
 	public void setArcs(List<Arc> arcs) {
 		this.arcs = arcs;

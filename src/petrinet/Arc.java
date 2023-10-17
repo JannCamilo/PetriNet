@@ -23,12 +23,11 @@ public class Arc {
 	
 	/**
 	 * Retrieves the Place associated with this Arc.
-	 * @param place The Place connected to this Arc.
 	 * @return The associated Place.
 	 */
 	public Place getPlace() {
 		return this.place;
-		}
+	}
 	
 	/**
 	 * Sets the Place associated with this Arc.

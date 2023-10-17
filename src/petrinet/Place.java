@@ -14,7 +14,7 @@ public class Place {
 	/**
 	 * Constructs a new Place with a specified initial number of tokens and associated arcs.
 	 * @param nbTokens The initial number of tokens in the place.
-	 * @param listArcs A list of arcs connected to this place.
+	 * @param arcs A list of arcs connected to this place.
 	 */	
 	public Place(int nbTokens, List<Arc> arcs) {
 		this.nbTokens = nbTokens;
