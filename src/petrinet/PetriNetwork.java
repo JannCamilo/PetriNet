@@ -138,6 +138,8 @@ public class PetriNetwork implements IPetriNetwork {
 	 */
 	public String toString() {return null;}
 	
+}
+	
 
 
 	
