@@ -5,7 +5,7 @@ package petrinet;
  * It extends the basic 'Arc' class and overrides specific methods to implement its behavior.
  */
 public class DrainerArc extends Arc {
-
+	
 	/**
 	 * Constructs a new DrainerArc with specified Place and Transition.
 	 * @param place The Place connected to this DrainerArc.
@@ -20,7 +20,9 @@ public class DrainerArc extends Arc {
 	 * Determines if this DrainerArc is active (always returns false as it is a draining arc).
 	 * @return Always false.
 	 */	
-	public boolean isActive() {return false;}	
+	public boolean isActive() {
+		return this.isActive;
+	}	
 	
 	/**
 	 * Updates the associated Place based on the characteristics of this DrainerArc.
