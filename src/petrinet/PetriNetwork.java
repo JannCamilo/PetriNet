@@ -4,64 +4,92 @@ import java.util.List;
 
 public class PetriNetwork implements IPetriNetwork{
 	
+	private List<Place> places;
+	private List<Transition> transitions;
+	private List<Arc> arcs;
 	
-	public PetriNetwork(List<Place> places, List<Transition> transitions, List<Arc> arcs) {}
+	public PetriNetwork(List<Place> places, List<Transition> transitions, List<Arc> arcs) {
+		this.places.addAll(places);
+		this.transitions.addAll(transitions);
+		this.arcs.addAll(arcs);
+	}
 	public PetriNetwork() {}
 
 	@Override
 	public void fireAll() {
-		// TODO Auto-generated method stub
-		
+        for (Transition t : this.transitions) {
+            t.fire();
+        }		
 	}
 
 	@Override
 	public void addPlace(Place place) {
-		// TODO Auto-generated method stub
-		
+		this.places.add(place);
 	}
 
 	@Override
 	public void addArc(Arc arc) {
-		// TODO Auto-generated method stub
+		this.arcs.add(arc);
 		
 	}
 
 	@Override
 	public void addTransition(Transition transition) {
-		// TODO Auto-generated method stub
+		this.transitions.add(transition);
 		
 	}
 
 	@Override
 	public void deletePlace(Place place) {
-		// TODO Auto-generated method stub
+		this.places.remove(place);
 		
 	}
 
 	@Override
 	public void deleteArc(Arc arc) {
-		// TODO Auto-generated method stub
+		this.arcs.remove(arc);
 		
 	}
 
 	@Override
 	public void deleTransition(Transition transition) {
-		// TODO Auto-generated method stub
+		this.transitions.remove(transition);
 		
 	}
 
 	@Override
 	public void fireTransition(Transition transition) {
-		// TODO Auto-generated method stub
 		
+		if (transition.fireable()){
+			transition.fire();
+		}
 	}
 	
 	
-	public List<Place> getPlaces(){return null;}	
-	public void setPlaces(List<Place> places) {}	
-	public List<Transition> getTransitions(){return null;}	
-	public void setTransiions(List<Transition> transitions) {}
-	public List<Arc> getArcs(){return null;}
-	public void setArcs() {}
-	public String toString() {return null;}
+	public List<Place> getPlaces(){
+		return this.places;
+	}
+	
+	public void setPlaces(List<Place> places) {
+		this.places = places;
+	}
+	
+	public List<Transition> getTransitions() { 
+		return this.transitions;
+	}
+	
+	public void setTransiions(List<Transition> transitions) {
+		this.transitions = transitions;
+	}
+	
+	public List<Arc> getArcs(){
+		return this.arcs;
+	}
+	
+	public void setArcs(List<Arc> arcs) {
+		this.arcs = arcs;
+	}
+
+	public String toString() {
+		return null;}
 }
