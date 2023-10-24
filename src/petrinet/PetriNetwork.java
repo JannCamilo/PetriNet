@@ -1,5 +1,6 @@
 package petrinet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,9 +9,15 @@ import java.util.List;
  */
 public class PetriNetwork implements IPetriNetwork {
 	
-	private List<Place> places;
-	private List<Transition> transitions;
-	private List<Arc> arcs;
+	private ArrayList<Place> places = new ArrayList<Place>();
+	private ArrayList<Transition> transitions = new ArrayList<Transition>();
+	private ArrayList<Arc> arcs = new ArrayList<Arc>();
+	
+	private int placePosition = 1;
+	private int transitionPosition = 1;
+	private int arcPosition = 1;
+	
+	protected String s = " -- ";
 	
 	/**
 	 * Constructs a new PetriNetwork with specified lists of places, transitions, and arcs.
@@ -18,10 +25,19 @@ public class PetriNetwork implements IPetriNetwork {
 	 * @param transitions The list of transitions in the Petri network.
 	 * @param arcs The list of arcs in the Petri network.
 	 */
-	public PetriNetwork(List<Place> places, List<Transition> transitions, List<Arc> arcs) {
-		this.places.addAll(places);
-		this.transitions.addAll(transitions);
-		this.arcs.addAll(arcs);
+	public PetriNetwork(ArrayList<Place> places, ArrayList<Transition> transitions, ArrayList<Arc> arcs) {
+		
+		for (Place p : places) {
+			  this.addPlace(p);
+		}
+		
+		for (Transition t : transitions) {
+			  this.addTransition(t);
+		}
+		
+		for (Arc a : arcs) {
+			  this.addArc(a);
+		}
 	}
 	
 	/**
@@ -39,20 +55,23 @@ public class PetriNetwork implements IPetriNetwork {
 
 	@Override
 	public void addPlace(Place place) {
-		// TODO Auto-generated method stub
+		place.setId("P_"+this.placePosition);
+		this.placePosition++;
 		this.places.add(place);
 	}
 
 	@Override
 	public void addArc(Arc arc) {
-		// TODO Auto-generated method stub
+		arc.setId("A_"+this.arcPosition);
+		this.arcPosition++;
 		this.arcs.add(arc);
 		
 	}
 
 	@Override
 	public void addTransition(Transition transition) {
-		// TODO Auto-generated method stub
+		transition.setId("T_"+this.transitionPosition);
+		this.transitionPosition++;
 		this.transitions.add(transition);
 		
 	}
@@ -98,7 +117,7 @@ public class PetriNetwork implements IPetriNetwork {
 	 * Sets the list of places in the Petri network.
 	 * @param places The list of places to be set.
 	 */
-	public void setPlaces(List<Place> places) {
+	public void setPlaces(ArrayList<Place> places) {
 		this.places = places;	
 	}
 	
@@ -114,7 +133,7 @@ public class PetriNetwork implements IPetriNetwork {
 	 * Sets the list of transitions in the Petri network.
 	 * @param transitions The list of transitions to be set.
 	 */
-	public void setTransiions(List<Transition> transitions) {
+	public void setTransiions(ArrayList<Transition> transitions) {
 		this.transitions = transitions;
 	}	
 	/**
@@ -129,7 +148,7 @@ public class PetriNetwork implements IPetriNetwork {
 	 * Sets the list of arcs in the Petri network.
 	 * @param arcs set the arcs inside the Petri Network.
 	 */
-	public void setArcs(List<Arc> arcs) {
+	public void setArcs(ArrayList<Arc> arcs) {
 		this.arcs = arcs;
 	}
 	
@@ -137,7 +156,64 @@ public class PetriNetwork implements IPetriNetwork {
 	 * Returns a string representation of the Petri network.
 	 * @return A string representing the Petri network.
 	 */
-	public String toString() {return null;}
+	public String toString() {
+		
+		// Fazer isso aqui num while true rodando em tudo partindo do começo
+		String res = "";
+		
+		for (Place p : places) {
+			
+			Arc inArc = p.getInArc();
+			Arc outArc = p.getOutArc();
+			
+			res += ((inArc != null ? inArc.toString() + this.s : "") + p.toString() + (outArc != null ? this.s + outArc.toString() : ""));
+			res += "\n";
+		}
+		
+		return res;
+	}
+	
+	/**
+	 * @return the placePosition
+	 */
+	public int getPlacePosition() {
+		return placePosition;
+	}
+
+	/**
+	 * @param placePosition the placePosition to set
+	 */
+	public void setPlacePosition(int placePosition) {
+		this.placePosition = placePosition;
+	}
+
+	/**
+	 * @return the transitionPosition
+	 */
+	public int getTransitionPosition() {
+		return transitionPosition;
+	}
+
+	/**
+	 * @param transitionPosition the transitionPosition to set
+	 */
+	public void setTransitionPosition(int transitionPosition) {
+		this.transitionPosition = transitionPosition;
+	}
+
+	/**
+	 * @return the arcPosition
+	 */
+	public int getArcPosition() {
+		return arcPosition;
+	}
+
+	/**
+	 * @param arcPosition the arcPosition to set
+	 */
+	public void setArcPosition(int arcPosition) {
+		this.arcPosition = arcPosition;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -150,32 +226,29 @@ public class PetriNetwork implements IPetriNetwork {
 		Place p2 = new Place();
 		
 		p1.setOutArc(a1);
-		
 		a1.setStart(p1);
 		a1.setEnd(t1);
-		
 		t1.setInArc(a1);
 		t1.setOutArc(a2);
-		
 		a2.setStart(t1);
 		a2.setEnd(p2);
-		
 		p2.setInArc(a2);
 		
-		Transition t1_ = (Transition) p2.getInArc().getStart();
-		Place p1_ = (Place) t1_.getInArc().getStart();
+		pn1.addPlace(p1);
+		pn1.addArc(a1);
+		pn1.addTransition(t1);
+		pn1.addArc(a2);		
+		pn1.addPlace(p2);
 		
-		System.out.println(p1_.getNbTokens());
+		System.out.println("Transitions: " + pn1.transitions);
+		System.out.println("Arcs: " + pn1.arcs);
+		System.out.println("Places: " + pn1.places);
 		
-		/**
-		 * TODO
-		 * method add everything to pn1 (V)
-		 * dafault for place tokens and incorrect actions
-		 * default for weight of arc and incorrect actions
-		 * fire
-		 */
+		System.out.println(pn1.toString());
+
+		
 	}
-	
+
 }
 	
 

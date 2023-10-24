@@ -13,6 +13,9 @@ public class Arc {
 	private Transition startTransition;
 	private Transition endTransition;
 	
+	private String id;
+	private PetriNetwork pn;
+	
 	public Arc() {};
 	
 	public void setStart(Object start) {
@@ -63,12 +66,41 @@ public class Arc {
 	 * Returns a string representation of this Arc.
 	 * @return A string representing this Arc.
 	 */
-	public String toString() {return null;}
+	public String toString() {
+		return this.id != null ? this.id : "";}
 	
 	/**
 	 * Updates the associated Place based on the characteristics of this Arc.
 	 */
 	public void updatePlace() {}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return this.id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the pn
+	 */
+	public PetriNetwork getPn() {
+		return pn;
+	}
+
+	/**
+	 * @param pn the pn to set
+	 */
+	public void setPn(PetriNetwork pn) {
+		this.pn = pn;
+	}
 	
 }
 

@@ -12,6 +12,9 @@ public class Transition {
 	private Arc inArc;
 	private Arc outArc;
 	
+	private String id;
+	private PetriNetwork pn;
+	
 	/**
 	 * Constructs a new Transition with a specified list of arcs.
 	 * @param listArcs The list of arcs connected to this transition.
@@ -70,7 +73,9 @@ public class Transition {
 	 * Returns a string representation of this transition.
 	 * @return A string representing this transition.
 	 */
-	public String toString() {return null;}
+	public String toString() {
+		return this.id;
+	}
 	
 	public void setInArc(Arc inArc) {
 		this.inArc = inArc;
@@ -86,6 +91,34 @@ public class Transition {
 	
 	public Arc getOutArc() {
 		return this.outArc;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return this.id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the PetriNetwork
+	 */
+	public PetriNetwork getPn() {
+		return pn;
+	}
+
+	/**
+	 * @param pn the PetriNetwork to set
+	 */
+	public void setPn(PetriNetwork pn) {
+		this.pn = pn;
 	}
 	
 }
