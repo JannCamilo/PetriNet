@@ -8,15 +8,15 @@ import java.util.List;
  */
 public class Transition {
 	
-	private List<Arc> arcs;
 	private boolean isFireble;
+	private Arc inArc;
+	private Arc outArc;
 	
 	/**
 	 * Constructs a new Transition with a specified list of arcs.
 	 * @param listArcs The list of arcs connected to this transition.
 	 */
 	public Transition(List<Arc> arcs) {
-		this.arcs = arcs;
 	};
 	
 	/**
@@ -42,7 +42,7 @@ public class Transition {
 	 * @return The list of arcs connected to this transition.
 	 */
 	public List<Arc> getArcs() {
-		return this.arcs;
+		return null;
 	}
 	
 	/**
@@ -50,7 +50,6 @@ public class Transition {
 	 * @param listArcs The list of arcs to be connected to this transition.
 	 */
 	public void setArcs(List<Arc> arcs) {
-		this.arcs = arcs;
 	}
 	
 	/**
@@ -58,7 +57,6 @@ public class Transition {
 	 * @param arc The arc to be added.
 	 */
 	public void addArc(Arc arc) {
-		this.arcs.add(arc);
 	}
 	
 	/**
@@ -66,7 +64,6 @@ public class Transition {
 	 * @param arc The arc to be removed.
 	 */
 	public void deleteArc(Arc arc) {
-		this.arcs.remove(arc);
 	}
 	
 	/**
@@ -74,4 +71,21 @@ public class Transition {
 	 * @return A string representing this transition.
 	 */
 	public String toString() {return null;}
+	
+	public void setInArc(Arc inArc) {
+		this.inArc = inArc;
+	}
+	
+	public void setOutArc(Arc outArc) {
+		this.outArc = outArc;
+	}
+	
+	public Arc getInArc() {
+		return this.inArc;
+	}
+	
+	public Arc getOutArc() {
+		return this.outArc;
+	}
+	
 }
