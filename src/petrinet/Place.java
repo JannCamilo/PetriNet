@@ -1,7 +1,5 @@
 package petrinet;
 
-import java.util.List;
-
 /**
  * The 'Place' class represents a location in a Petri net where tokens can be stored.
  * It contains methods for managing the number of tokens and associated arcs.
@@ -9,17 +7,21 @@ import java.util.List;
 public class Place {
 	
 	private int nbTokens; // Number of tokens in this place.
-	private List<Arc> arcs;
+	private Arc inArc;
+	private Arc outArc;
 	
 	/**
 	 * Constructs a new Place with a specified initial number of tokens and associated arcs.
 	 * @param nbTokens The initial number of tokens in the place.
 	 * @param arcs A list of arcs connected to this place.
 	 */	
-	public Place(int nbTokens, List<Arc> arcs) {
+	public Place(int nbTokens, Arc inArc, Arc outArc) {
 		this.nbTokens = nbTokens;
-		this.arcs = arcs;
+		this.inArc = inArc;
+		this.outArc = outArc;
 	}
+	
+	public Place() {};
 	
 	/**
 	 * Constructs a new Place with a specified initial number of tokens.
@@ -44,20 +46,21 @@ public class Place {
 		this.nbTokens = nbTokens;
 	}
 	
-	/**
-	 * Retrieves the list of arcs associated with this place.
-	 * @return The list of arcs connected to this place.
-	 */
-	public List<Arc> getArcs() {
-		return this.arcs;
+	
+	public void setInArc(Arc inArc) {
+		this.inArc = inArc;
 	}
 	
-	/**
-	 * Sets the list of arcs associated with this place.
-	 * @param listArcs The list of arcs to be connected to this place.
-	 */
-	public void setArcs(List<Arc> arcs) {
-		this.arcs = arcs;
+	public void setOutArc(Arc outArc) {
+		this.outArc = outArc;
+	}
+	
+	public Arc getInArc() {
+		return this.inArc;
+	}
+	
+	public Arc getOutArc() {
+		return this.outArc;
 	}
 	
 	/**

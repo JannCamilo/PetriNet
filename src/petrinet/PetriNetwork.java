@@ -139,6 +139,43 @@ public class PetriNetwork implements IPetriNetwork {
 	 */
 	public String toString() {return null;}
 	
+	public static void main(String[] args) {
+		
+		PetriNetwork pn1 = new PetriNetwork();
+		
+		Place p1 = new Place(2);
+		Arc a1 = new Arc();
+		Transition t1 = new Transition();
+		Arc a2 = new Arc();
+		Place p2 = new Place();
+		
+		p1.setOutArc(a1);
+		
+		a1.setStart(p1);
+		a1.setEnd(t1);
+		
+		t1.setInArc(a1);
+		t1.setOutArc(a2);
+		
+		a2.setStart(t1);
+		a2.setEnd(p2);
+		
+		p2.setInArc(a2);
+		
+		Transition t1_ = (Transition) p2.getInArc().getStart();
+		Place p1_ = (Place) t1_.getInArc().getStart();
+		
+		System.out.println(p1_.getNbTokens());
+		
+		/**
+		 * TODO
+		 * method add everything to pn1 (V)
+		 * dafault for place tokens and incorrect actions
+		 * default for weight of arc and incorrect actions
+		 * fire
+		 */
+	}
+	
 }
 	
 
