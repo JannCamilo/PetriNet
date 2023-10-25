@@ -8,19 +8,25 @@ import java.util.List;
  */
 public class Transition {
 	
+	// Flag indicating if the transition is fireable.
 	private boolean isFireble;
+	
+	// Incoming and outgoing arcs connected to the transition.
 	private Arc inArc;
 	private Arc outArc;
 	
+	// Unique identifier for this transition.
 	private String id;
+	
+	// Associated PetriNetwork instance.
 	private PetriNetwork pn;
 	
 	/**
 	 * Constructs a new Transition with a specified list of arcs.
-	 * @param listArcs The list of arcs connected to this transition.
+	 * @param arcs The list of arcs connected to this transition.
 	 */
 	public Transition(List<Arc> arcs) {
-	};
+	}
 	
 	/**
 	 * Constructs a new Transition with no initial arcs.
@@ -95,48 +101,67 @@ public class Transition {
 		return this.id;
 	}
 	
+	/**
+	 * Sets the incoming arc connected to this transition.
+	 * @param inArc The incoming arc.
+	 */
 	public void setInArc(Arc inArc) {
 		this.inArc = inArc;
 	}
 	
+	/**
+	 * Sets the outgoing arc connected to this transition.
+	 * @param outArc The outgoing arc.
+	 */
 	public void setOutArc(Arc outArc) {
 		this.outArc = outArc;
 	}
 	
+	/**
+	 * Retrieves the incoming arc connected to this transition.
+	 * @return The incoming arc.
+	 */
 	public Arc getInArc() {
 		return this.inArc;
 	}
 	
+	/**
+	 * Retrieves the outgoing arc connected to this transition.
+	 * @return The outgoing arc.
+	 */
 	public Arc getOutArc() {
 		return this.outArc;
 	}
 
 	/**
-	 * @return the id
+	 * Retrieves the unique identifier of the transition.
+	 * @return The identifier of the transition.
 	 */
 	public String getId() {
 		return this.id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * Sets the unique identifier for the transition.
+	 * @param id The identifier to be set.
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the PetriNetwork
+	 * Retrieves the associated PetriNetwork of the transition.
+	 * @return The PetriNetwork instance.
 	 */
 	public PetriNetwork getPn() {
 		return pn;
 	}
 
 	/**
-	 * @param pn the PetriNetwork to set
+	 * Sets the associated PetriNetwork for the transition.
+	 * @param pn The PetriNetwork instance to be set.
 	 */
 	public void setPn(PetriNetwork pn) {
 		this.pn = pn;
 	}
-	
 }

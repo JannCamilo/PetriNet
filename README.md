@@ -2,16 +2,16 @@
 
 The PetriNetwork class is a Java implementation representing a Petri net, complete with places, transitions, and arcs. It adheres to the IPetriNetwork interface, offering a suite of methods for managing and analyzing the network.
 
-# Table of Contents
-Overview
-Usage
-Methods
-Example
+## Table of Contents
+- Overview
+- Usage
+- Methods
+- Example
 
-# Overview
+## Overview
 The PetriNetwork class encapsulates the core functionality of a Petri net. It maintains lists of places, transitions, and arcs, and provides methods for adding, deleting, and firing these elements.
 
-# Usage
+## Usage
 To utilize the PetriNetwork class, follow these steps:
 
 Import the petrinet package:
@@ -28,112 +28,111 @@ Perform operations such as firing transitions or retrieving information about th
 
 pn1.fireTransition(t1);
 
-# Methods
-fireAll()
+## Methods
+fireAll()<br>
 Fires all transitions in the Petri network.
 
-addPlace(Place place)
+addPlace(Place place)<br>
 Adds a place to the Petri network.
 
-addArc(Arc arc)
+addArc(Arc arc)<br>
 Adds an arc to the Petri network.
 
-addTransition(Transition transition)
+addTransition(Transition transition)<br>
 Adds a transition to the Petri network.
 
-deletePlace(Place place)
+deletePlace(Place place)<br>
 Deletes a place from the Petri network.
 
-deleteArc(Arc arc)
+deleteArc(Arc arc)<br>
 Deletes an arc from the Petri network.
 
-deleteTransition(Transition transition)
+deleteTransition(Transition transition)<br>
 Deletes a transition from the Petri network.
 
-fireTransition(Transition transition)
+fireTransition(Transition transition)<br>
 Fires a specific transition in the Petri network.
 
-getPlaces()
+getPlaces()<br>
 Retrieves the list of places in the Petri network.
 
-setPlaces(ArrayList<Place> places)
+setPlaces(ArrayList<Place> places)<br>
 Sets the list of places in the Petri network.
 
-getTransitions()
+getTransitions()<br>
 Retrieves the list of transitions in the Petri network.
 
-setTransitions(ArrayList<Transition> transitions)
+setTransitions(ArrayList<Transition> transitions)<br>
 Sets the list of transitions in the Petri network.
 
-getArcs()
+getArcs()<br>
 Retrieves the list of arcs in the Petri network.
 
-setArcs(ArrayList<Arc> arcs)
+setArcs(ArrayList<Arc> arcs)<br>
 Sets the list of arcs in the Petri network.
 
-toString()
+toString()<br>
 Returns a string representation of the Petri network.
 
-getPlacePosition()
+getPlacePosition()<br>
 Retrieves the position of the current place.
 
-setPlacePosition(int placePosition)
+setPlacePosition(int placePosition)<br>
 Sets the position of the current place.
 
-getTransitionPosition()
+getTransitionPosition()<br>
 Retrieves the position of the current transition.
 
-setTransitionPosition(int transitionPosition)
+setTransitionPosition(int transitionPosition)<br>
 Sets the position of the current transition.
 
-getArcPosition()
+getArcPosition()<br>
 Retrieves the position of the current arc.
 
-setArcPosition(int arcPosition)
+setArcPosition(int arcPosition)<br>
 Sets the position of the current arc.
 
-# Example
+## Example
 Here's an example of how to create and interact with a Petri network:
 
-java
-Copy code
-try {
-    Place p1 = new Place(2);
-    Arc a1 = new Arc();
-    Transition t1 = new Transition();
-    Arc a2 = new Arc();
-    Place p2 = new Place(2);
+{
+    try {
+        Place p1 = new Place(2);
+        Arc a1 = new Arc();
+        Transition t1 = new Transition();
+        Arc a2 = new Arc();
+        Place p2 = new Place(2);
 
-    p1.setOutArc(a1);
-    // Set up more connections...
+        p1.setOutArc(a1);
+        // Set up more connections...
 
-    ArrayList<Place> places = new ArrayList<Place>();
-    ArrayList<Transition> transitions = new ArrayList<Transition>();
-    ArrayList<Arc> arcs = new ArrayList<Arc>();
+        ArrayList<Place> places = new ArrayList<Place>();
+        ArrayList<Transition> transitions = new ArrayList<Transition>();
+        ArrayList<Arc> arcs = new ArrayList<Arc>();
 
-    places.add(p1);
-    places.add(p2);
-    transitions.add(t1);
-    arcs.add(a1);
-    arcs.add(a2);
+        places.add(p1);
+        places.add(p2);
+        transitions.add(t1);
+        arcs.add(a1);
+        arcs.add(a2);
 
-    PetriNetwork pn1 = new PetriNetwork(places, transitions, arcs);
-    System.out.println(PN1.toString());
+        PetriNetwork pn1 = new PetriNetwork(places, transitions, arcs);
+        System.out.println(PN1.toString());
 
-    System.out.println("\n------Before to do Fire------");
-    System.out.println("Number of tokens in " + p1 + " : " + p1.getNbTokens());
-    System.out.println("Number of tokens in " + p2 + " : " + p2.getNbTokens());
+        System.out.println("\n------Before to do Fire------");
+        System.out.println("Number of tokens in " + p1 + " : " + p1.getNbTokens());
+        System.out.println("Number of tokens in " + p2 + " : " + p2.getNbTokens());
 
-    t1.fire(); // Perform a transition firing
-    System.out.println("\n------After to do Fire-------");
-    System.out.println("Number of tokens in " + p1 + " : " + p1.getNbTokens());
-    System.out.println("Number of tokens in " + p2 + " : " + p2.getNbTokens());
+        t1.fire(); // Perform a transition firing
+        System.out.println("\n------After to do Fire-------");
+        System.out.println("Number of tokens in " + p1 + " : " + p1.getNbTokens());
+        System.out.println("Number of tokens in " + p2 + " : " + p2.getNbTokens());
 
-    // Attempt to create a place with negative tokens
-    Place p3 = new Place(-5);
-
-} catch (NegativeTokenInsertedException e) {
-    System.out.println("\nError: " + e.getMessage());
+        // Attempt to create a place with negative tokens
+        Place p3 = new Place(-5);
+    } catch (NegativeTokenInsertedException e) {
+        System.out.println("\nError: " + e.getMessage());
+    }
 }
 
 This will create a Petri network, set up connections between elements, and fire a transition, demonstrating the network's behavior. If an attempt is made to create a place with negative tokens, it will raise a NegativeTokenInsertedException.

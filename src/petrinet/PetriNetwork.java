@@ -140,7 +140,8 @@ public class PetriNetwork implements IPetriNetwork {
 	 */
 	public void setTransiions(ArrayList<Transition> transitions) {
 		this.transitions = transitions;
-	}	
+	}
+
 	/**
 	 * Retrieves the list of arcs in the Petri network.
 	 * @return The list of arcs.
@@ -163,7 +164,6 @@ public class PetriNetwork implements IPetriNetwork {
 	 */
 	public String toString() {
 		
-		// Fazer isso aqui num while true rodando em tudo partindo do começo
 		String res = "";
 		
 		res += "----------Places---------- \n";
@@ -246,14 +246,14 @@ public class PetriNetwork implements IPetriNetwork {
 	
 	public static void main(String[] args) {
 		try {
-			//PetriNetwork pn1 = new PetriNetwork();
-			
-			Place p1 = new Place(2);
+			// create every element of the network
+			Place p1 = new Place(3);
 			Arc a1 = new Arc();
 			Transition t1 = new Transition();
 			Arc a2 = new Arc();
 			Place p2 = new Place(2);
 			
+			// Connect each element of the petri network
 			p1.setOutArc(a1);
 			a1.setStart(p1);
 			a1.setEnd(t1);
@@ -263,38 +263,35 @@ public class PetriNetwork implements IPetriNetwork {
 			a2.setEnd(p2);
 			p2.setInArc(a2);
 			a1.setWeight(2);	
-			a2.setWeight(2);
+			a2.setWeight(5);
 			
-			/*pn1.addPlace(p1);
-			pn1.addArc(a1);
-			pn1.addTransition(t1);
-			pn1.addArc(a2);		
-			pn1.addPlace(p2);
-			
-			System.out.println(pn1.toString());*/
-
+			// Creates a list for each network element
 			ArrayList<Place> places = new ArrayList<Place>();
 			ArrayList<Transition> transitions = new ArrayList<Transition>();
 			ArrayList<Arc> arcs = new ArrayList<Arc>();
-
+			
+			// Add the elements to the list and the network
 			places.add(p1);
 			places.add(p2);
 			transitions.add(t1);
 			arcs.add(a1);
 			arcs.add(a2);
-			PetriNetwork PN1 = new PetriNetwork(places, transitions, arcs);
-			System.out.println(PN1.toString());
+			PetriNetwork pn1 = new PetriNetwork(places, transitions, arcs);
+			System.out.println(pn1.toString());
 
 			System.out.println("\n------Before to do Fire------");
 			System.out.println("Number of thokens in "+ p1 + " : " + p1.getNbTokens());
 			System.out.println("Number of thokens in "+ p2 + " : " + p2.getNbTokens());
 
-			t1.fire(); // Do Fire
+			// Do Fire
+			t1.fire(); 
+
 			System.out.println("\n------After to do Fire-------");
 			System.out.println("Number of thokens in "+ p1 + " : " + p1.getNbTokens());
 			System.out.println("Number of thokens in "+ p2 + " : " + p2.getNbTokens());
-			Place p3 = new Place(-5);
-			
+
+			//Try to create a new place with a negative number of tokens
+			Place p3 = new Place(-5);			
 		} catch (NegativeTokenInsertedException e) {
 			System.out.println("\nError: " + e.getMessage());
 		}
