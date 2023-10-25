@@ -186,14 +186,10 @@ public class PetriNetwork implements IPetriNetwork {
 		res += "-----------Arcs----------- \n";
 		
 		for (Arc a : this.arcs) {
-			
-			System.out.println(a);
-			
+						
 			Object start = a.getStart();
 			Object end = a.getEnd();
-			
-			System.out.println(end);
-			
+						
 			res += ((start != null ? start.toString() + this.s : "") + a.toString() + (end != null ? this.s + end.toString() : ""));
 			res += "\n";
 		}
@@ -260,20 +256,13 @@ public class PetriNetwork implements IPetriNetwork {
 		t1.setOutArc(a2);
 		a2.setStart(t1);
 		a2.setEnd(p2);
-		p2.setInArc(a2);
-		
-		Object b = a1.getEnd();
-		
+		p2.setInArc(a2);		
 		
 		pn1.addPlace(p1);
 		pn1.addArc(a1);
 		pn1.addTransition(t1);
 		pn1.addArc(a2);		
 		pn1.addPlace(p2);
-		
-//		System.out.println("Transitions: " + pn1.transitions);
-//		System.out.println("Arcs: " + pn1.arcs);
-//		System.out.println("Places: " + pn1.places);
 		
 		System.out.println(pn1.toString());
 
