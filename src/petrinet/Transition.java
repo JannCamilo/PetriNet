@@ -2,6 +2,8 @@ package petrinet;
 
 import java.util.List;
 
+import petrinet.exceptions.NoExistingObjectException;
+
 /**
  * The 'Transition' class represents a state in a Petri net where a firing event can occur.
  * It manages the arcs associated with the transition and provides methods to control its behavior.
@@ -37,8 +39,9 @@ public class Transition {
 	
 	/**
 	 * Fires the transition, updating connected places according to Petri net semantics.
+	 * @throws NoExistingObjectException 
 	 */
-	public void fire() {
+	public void fire() throws NoExistingObjectException {
 		// Check if is posible do the fire
 		Place place = (Place) inArc.getStart();
 		if ( place.getNbTokens() < inArc.getWeight()){

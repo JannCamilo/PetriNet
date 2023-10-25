@@ -3,6 +3,9 @@ package petrinet;
 import java.util.ArrayList;
 import java.util.List;
 
+import petrinet.exceptions.NegativeTokenInsertedException;
+import petrinet.exceptions.NoExistingObjectException;
+
 /**
  * The 'PetriNetwork' class represents a Petri net with places, transitions, and arcs.
  * It implements the IPetriNetwork interface, providing methods to manipulate and analyze the network.
@@ -49,7 +52,12 @@ public class PetriNetwork implements IPetriNetwork {
 	public void fireAll() {
 		// TODO Auto-generated method stub
         for (Transition t : this.transitions) {
-            t.fire();
+            try {
+				t.fire();
+			} catch (NoExistingObjectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }		
 	}
 
@@ -102,7 +110,12 @@ public class PetriNetwork implements IPetriNetwork {
         //if (transition == null) throw new NegativeTokenInsertedException("Error: the transition don't exist");
 
 		if (transition.fireable()){
-			transition.fire();
+			try {
+				transition.fire();
+			} catch (NoExistingObjectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println(transition.getId() + " fired");
 		}else {
             System.out.println(transition.getId() + " can't fire");
@@ -192,11 +205,19 @@ public class PetriNetwork implements IPetriNetwork {
 		
 		for (Arc a : this.arcs) {
 						
-			Object start = a.getStart();
-			Object end = a.getEnd();
-						
-			res += ((start != null ? start.toString() + this.s : "") + a.toString() + (end != null ? this.s + end.toString() : ""));
-			res += "\n";
+			Object start;
+			try {
+				start = a.getStart();
+				Object end = a.getEnd();
+				
+				res += ((start != null ? start.toString() + this.s : "") + a.toString() + (end != null ? this.s + end.toString() : ""));
+				res += "\n";
+				
+			} catch (NoExistingObjectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
 		}
 		
 		return res;
@@ -295,7 +316,7 @@ public class PetriNetwork implements IPetriNetwork {
 			System.out.println("Number of thokens in "+ p2 + " : " + p2.getNbTokens());
 			Place p3 = new Place(-5);
 			
-		} catch (NegativeTokenInsertedException e) {
+		} catch (Exception e) {
 			System.out.println("\nError: " + e.getMessage());
 		}
 	}

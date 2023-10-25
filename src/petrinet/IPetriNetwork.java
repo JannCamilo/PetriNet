@@ -1,5 +1,7 @@
 package petrinet;
 
+import petrinet.exceptions.NegativeTokenInsertedException;
+
 /**
  * The 'IPetriNetwork' interface defines the methods that a Petri net network should implement.
  * It provides a set of operations for manipulating and analyzing a Petri net.

@@ -1,5 +1,7 @@
 package petrinet;
 
+import petrinet.exceptions.NegativeTokenInsertedException;
+
 /**
  * The 'Place' class represents a location in a Petri net where tokens can be stored.
  * It contains methods for managing the number of tokens and associated arcs.

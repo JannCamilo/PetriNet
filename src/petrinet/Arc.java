@@ -1,5 +1,9 @@
 package petrinet;
 
+import petrinet.exceptions.ExistingObjectException;
+import petrinet.exceptions.NegativeTokenInsertedException;
+import petrinet.exceptions.NoExistingObjectException;
+
 /**
  * The 'Arc' class represents a connection between a Place and a Transition in a Petri net.
  * It defines methods for retrieving and setting associated elements, as well as activation status.
@@ -16,15 +20,16 @@ public class Arc {
 	private Transition endTransition;
 	
 	private String id;
-	private PetriNetwork pn;
 	
 	public Arc() {
 		this.weight = 1; // weight for default is 1
 	};
 	
-	public void setStart(Object start) {
+	public void setStart(Object start) throws ExistingObjectException {
+		
 		if (this.startPlace != null || this.startTransition != null) {
-			//exception
+			throw new ExistingObjectException();
+			
 		} else if (start.getClass() == Place.class) {
 			this.startPlace = (Place) start;
 			
@@ -33,9 +38,10 @@ public class Arc {
 		}
 	};
 	
-	public void setEnd(Object end) {
+	public void setEnd(Object end) throws ExistingObjectException {
 		if (this.endPlace != null || this.endTransition != null) {
-			//exception
+			throw new ExistingObjectException();
+
 		} else if (end.getClass() == Place.class) {
 			this.endPlace = (Place) end;
 			
@@ -44,9 +50,11 @@ public class Arc {
 		}
 	};
 	
-	public Object getStart() {
+	public Object getStart() throws NoExistingObjectException {
 		
-		// TODO: if there's no start, sends Exception
+		if (this.startTransition == null || this.startPlace == null) {
+			throw new NoExistingObjectException();
+		};
 		
 		if (this.startPlace != null) {
 			return this.startPlace;
@@ -55,9 +63,11 @@ public class Arc {
 		}
 	}
 
-	public Object getEnd() {
+	public Object getEnd() throws NoExistingObjectException {
 		
-		// TODO: if there's no end, sends Exception
+		if (this.endTransition == null || this.endPlace == null) {
+			throw new NoExistingObjectException();
+		};
 		
 		if (this.endPlace != null) {
 			return this.endPlace;
@@ -79,7 +89,7 @@ public class Arc {
 	public void updatePlace() {
 		if (this.endPlace != null ) {
 			endPlace.setNbTokens(endPlace.getNbTokens()+weight);
-		} else if (this.startPlace != null ) {
+		} if (this.startPlace != null ) {
 			startPlace.setNbTokens(startPlace.getNbTokens()-weight);
 		}
 	}
@@ -114,20 +124,6 @@ public class Arc {
 	 */
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the pn
-	 */
-	public PetriNetwork getPn() {
-		return pn;
-	}
-
-	/**
-	 * @param pn the pn to set
-	 */
-	public void setPn(PetriNetwork pn) {
-		this.pn = pn;
 	}
 	
 }
