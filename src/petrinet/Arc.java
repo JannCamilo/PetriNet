@@ -58,7 +58,7 @@ public class Arc {
 		if (this.endPlace != null) {
 			return this.endPlace;
 		} else {
-			return this.endPlace;
+			return this.endTransition;
 		}
 	}
 	

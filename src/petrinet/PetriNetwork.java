@@ -161,12 +161,40 @@ public class PetriNetwork implements IPetriNetwork {
 		// Fazer isso aqui num while true rodando em tudo partindo do começo
 		String res = "";
 		
-		for (Place p : places) {
+		res += "----------Places---------- \n";
+
+		for (Place p : this.places) {
 			
 			Arc inArc = p.getInArc();
 			Arc outArc = p.getOutArc();
 			
 			res += ((inArc != null ? inArc.toString() + this.s : "") + p.toString() + (outArc != null ? this.s + outArc.toString() : ""));
+			res += "\n";
+		}
+		
+		res += "--------Transitions------- \n";
+		
+		for (Transition t : this.transitions) {
+			
+			Arc inArc = t.getInArc();
+			Arc outArc = t.getOutArc();
+			
+			res += ((inArc != null ? inArc.toString() + this.s : "") + t.toString() + (outArc != null ? this.s + outArc.toString() : ""));
+			res += "\n";
+		}
+		
+		res += "-----------Arcs----------- \n";
+		
+		for (Arc a : this.arcs) {
+			
+			System.out.println(a);
+			
+			Object start = a.getStart();
+			Object end = a.getEnd();
+			
+			System.out.println(end);
+			
+			res += ((start != null ? start.toString() + this.s : "") + a.toString() + (end != null ? this.s + end.toString() : ""));
 			res += "\n";
 		}
 		
@@ -234,15 +262,18 @@ public class PetriNetwork implements IPetriNetwork {
 		a2.setEnd(p2);
 		p2.setInArc(a2);
 		
+		Object b = a1.getEnd();
+		
+		
 		pn1.addPlace(p1);
 		pn1.addArc(a1);
 		pn1.addTransition(t1);
 		pn1.addArc(a2);		
 		pn1.addPlace(p2);
 		
-		System.out.println("Transitions: " + pn1.transitions);
-		System.out.println("Arcs: " + pn1.arcs);
-		System.out.println("Places: " + pn1.places);
+//		System.out.println("Transitions: " + pn1.transitions);
+//		System.out.println("Arcs: " + pn1.arcs);
+//		System.out.println("Places: " + pn1.places);
 		
 		System.out.println(pn1.toString());
 
