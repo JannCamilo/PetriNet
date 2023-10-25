@@ -17,19 +17,28 @@ public class Place {
 	 * @param nbTokens The initial number of tokens in the place.
 	 * @param arcs A list of arcs connected to this place.
 	 */	
-	public Place(int nbTokens, Arc inArc, Arc outArc) {
+	public Place(int nbTokens, Arc inArc, Arc outArc) throws NegativeTokenInsertedException{
+		if (nbTokens < 0){
+			throw new NegativeTokenInsertedException("Not is posible a number of thokens inferior to 0");
+		}
 		this.nbTokens = nbTokens;
 		this.inArc = inArc;
 		this.outArc = outArc;
 	}
 	
-	public Place() {};
+	public Place() {
+		this.nbTokens = 0; // Number of tokens for default is 0
+	};
 	
 	/**
 	 * Constructs a new Place with a specified initial number of tokens.
 	 * @param nbTokens The initial number of tokens in the place.
+	 * @throws NegativeTokenInsertedException
 	 */
-	public Place(int nbTokens) {
+	public Place(int nbTokens) throws NegativeTokenInsertedException {
+		if (nbTokens < 0){
+			throw new NegativeTokenInsertedException("The number of thokens can not be inferior to 0");
+		}
 		this.nbTokens = nbTokens;
 	}
 	

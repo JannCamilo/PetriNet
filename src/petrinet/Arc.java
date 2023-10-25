@@ -7,6 +7,8 @@ package petrinet;
  */
 public class Arc {
 	
+	private int weight;
+
 	private Place startPlace;
 	private Place endPlace;
 	
@@ -16,7 +18,9 @@ public class Arc {
 	private String id;
 	private PetriNetwork pn;
 	
-	public Arc() {};
+	public Arc() {
+		this.weight = 1; // weight for default is 1
+	};
 	
 	public void setStart(Object start) {
 		if (this.startPlace != null || this.startTransition != null) {
@@ -72,7 +76,31 @@ public class Arc {
 	/**
 	 * Updates the associated Place based on the characteristics of this Arc.
 	 */
-	public void updatePlace() {}
+	public void updatePlace() {
+		if (this.endPlace != null ) {
+			endPlace.setNbTokens(endPlace.getNbTokens()+weight);
+		} else if (this.startPlace != null ) {
+			startPlace.setNbTokens(startPlace.getNbTokens()-weight);
+		}
+	}
+	
+	/**
+	 * @return the weight
+	 */
+	public int getWeight() {
+		return this.weight;
+	}
+
+	/**
+	 * @param weight the weight to set
+	 * @throws NegativeTokenInsertedException
+	 */
+	public void setWeight(int weight) throws NegativeTokenInsertedException {
+		if (weight < 0){
+			throw new NegativeTokenInsertedException("Not is posible a weight inferior to 0");
+		}
+		this.weight = weight;
+	}
 
 	/**
 	 * @return the id

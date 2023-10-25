@@ -50,6 +50,7 @@ public interface IPetriNetwork {
 	/**
 	 * Fires a specific transition in the Petri network.
 	 * @param transition The transition to be fired.
+	 * @throws NegativeTokenInsertedException
 	 */
 	public void fireTransition(Transition transition);
 }

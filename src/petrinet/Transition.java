@@ -31,14 +31,32 @@ public class Transition {
 	 * Checks if the transition is fireable based on the current state of connected places.
 	 * @return True if the transition is fireable, otherwise false.
 	 */
-	public boolean fireable() {
+	public boolean fireable() {		
 		return this.isFireble;
 	}
 	
 	/**
 	 * Fires the transition, updating connected places according to Petri net semantics.
 	 */
-	public void fire() {}
+	public void fire() {
+		// Check if is posible do the fire
+		Place place = (Place) inArc.getStart();
+		if ( place.getNbTokens() < inArc.getWeight()){
+			this.isFireble = false;
+			System.out.println("Can't fire!!");
+		}else{
+			this.isFireble = true;
+			System.out.println("Fire!!");
+		}
+        // Remove tokens to the target places
+        if (inArc.getWeight() > 0 && isFireble) {
+			inArc.updatePlace();
+        }
+        // add tokens to the target places
+		if (outArc.getWeight() > 0 && isFireble) {
+			outArc.updatePlace();
+        }
+	}
 	
 	/**
 	 * Retrieves the list of arcs associated with this transition.
