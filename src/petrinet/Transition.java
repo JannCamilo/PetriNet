@@ -11,17 +11,21 @@ import petrinet.exceptions.NoExistingObjectException;
  */
 public class Transition {
 	
-	private boolean isFireble;
-	private ArrayList<Arc> inArcs;
-	private ArrayList<Arc> outArcs;
+	private boolean isFireble = true;
+	private ArrayList<Arc> inArcs = new ArrayList<Arc>();
+	private ArrayList<Arc> outArcs= new ArrayList<Arc>();
 	
 	private String id;
 	
 	/**
 	 * Constructs a new Transition with a specified list of arcs.
 	 * @param listArcs The list of arcs connected to this transition.
+	 * @throws NoExistingObjectException 
 	 */
-	public Transition(List<Arc> arcs) {
+	public Transition(ArrayList<Arc> inArcs, ArrayList<Arc> outArcs) throws NoExistingObjectException {
+		if (inArcs.size() == 0 || outArcs.size() == 0) {
+			throw new NoExistingObjectException();
+		}
 	};
 	
 	/**
@@ -74,41 +78,27 @@ public class Transition {
 	}
 	
 	/**
-	 * Retrieves the list of arcs associated with this transition.
-	 * @return The list of arcs connected to this transition.
-	 */
-	public List<Arc> getArcs() {
-		return null;
-	}
-	
-	/**
-	 * Sets the list of arcs associated with this transition.
-	 * @param listArcs The list of arcs to be connected to this transition.
-	 */
-	public void setArcs(List<Arc> arcs) {
-	}
-	
-	/**
-	 * Adds a new arc to the list of arcs connected to this transition.
-	 * @param arc The arc to be added.
-	 */
-	public void addArc(Arc arc) {
-	}
-	
-	/**
-	 * Deletes a specified arc from the list of arcs connected to this transition.
-	 * @param arc The arc to be removed.
-	 */
-	public void deleteArc(Arc arc) {
-	}
-	
-	/**
 	 * Returns a string representation of this transition.
 	 * @return A string representing this transition.
 	 */
 	public String toString() {
 		return this.id;
 	}
+	
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return this.id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	
 	public void setInArcs(ArrayList<Arc> inArcs) {
 		this.inArcs = inArcs;
@@ -134,18 +124,4 @@ public class Transition {
 		return this.outArcs;
 	}
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return this.id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-	
 }
