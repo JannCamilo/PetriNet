@@ -194,11 +194,16 @@ public class PetriNetwork implements IPetriNetwork {
 		
 		for (Transition t : this.transitions) {
 			
-			Arc inArc = t.getInArc();
-			Arc outArc = t.getOutArc();
+			ArrayList<Arc> inArcs = t.getInArcs();
+			ArrayList<Arc> outArcs = t.getOutArcs();
 			
-			res += ((inArc != null ? inArc.toString() + this.s : "") + t.toString() + (outArc != null ? this.s + outArc.toString() : ""));
-			res += "\n";
+			for (Arc inArc : inArcs) {
+				for (Arc outArc: outArcs) {
+					res += ((inArc != null ? inArc.toString() + this.s : "") + t.toString() + (outArc != null ? this.s + outArc.toString() : ""));
+					res += "\n";
+				}
+			}
+
 		}
 		
 		res += "-----------Arcs----------- \n";
@@ -278,8 +283,8 @@ public class PetriNetwork implements IPetriNetwork {
 			p1.setOutArc(a1);
 			a1.setStart(p1);
 			a1.setEnd(t1);
-			t1.setInArc(a1);
-			t1.setOutArc(a2);
+			t1.addInArc(a1);
+			t1.addOutArc(a2);
 			a2.setStart(t1);
 			a2.setEnd(p2);
 			p2.setInArc(a2);

@@ -52,7 +52,7 @@ public class Arc {
 	
 	public Object getStart() throws NoExistingObjectException {
 		
-		if (this.startTransition == null || this.startPlace == null) {
+		if (this.startTransition == null && this.startPlace == null) {
 			throw new NoExistingObjectException();
 		};
 		
@@ -65,7 +65,7 @@ public class Arc {
 
 	public Object getEnd() throws NoExistingObjectException {
 		
-		if (this.endTransition == null || this.endPlace == null) {
+		if (this.endTransition == null && this.endPlace == null) {
 			throw new NoExistingObjectException();
 		};
 		

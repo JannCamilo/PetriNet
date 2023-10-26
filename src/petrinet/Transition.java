@@ -1,5 +1,6 @@
 package petrinet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import petrinet.exceptions.NoExistingObjectException;
@@ -11,11 +12,10 @@ import petrinet.exceptions.NoExistingObjectException;
 public class Transition {
 	
 	private boolean isFireble;
-	private Arc inArc;
-	private Arc outArc;
+	private ArrayList<Arc> inArcs;
+	private ArrayList<Arc> outArcs;
 	
 	private String id;
-	private PetriNetwork pn;
 	
 	/**
 	 * Constructs a new Transition with a specified list of arcs.
@@ -42,23 +42,35 @@ public class Transition {
 	 * @throws NoExistingObjectException 
 	 */
 	public void fire() throws NoExistingObjectException {
-		// Check if is posible do the fire
-		Place place = (Place) inArc.getStart();
-		if ( place.getNbTokens() < inArc.getWeight()){
-			this.isFireble = false;
-			System.out.println("Can't fire!!");
-		}else{
-			this.isFireble = true;
-			System.out.println("Fire!!");
+		
+		for (Arc inArc : this.inArcs) {
+			Place place = (Place) inArc.getStart();
+			
+			// Check if is possible do the fire
+			if ( place.getNbTokens() < inArc.getWeight()){
+				
+				this.isFireble = false;
+				System.out.println("Can't fire!!");
+				
+			} else {
+				this.isFireble = true;
+				System.out.println("Fire!!");
+			}
+			
+	        // Remove tokens to the target places
+	        if (inArc.getWeight() > 0 && isFireble) {
+				inArc.updatePlace();
+	        }
 		}
-        // Remove tokens to the target places
-        if (inArc.getWeight() > 0 && isFireble) {
-			inArc.updatePlace();
-        }
-        // add tokens to the target places
-		if (outArc.getWeight() > 0 && isFireble) {
-			outArc.updatePlace();
-        }
+		
+		for (Arc outArc: this.outArcs) {
+			
+	        // add tokens to the target places
+			if (outArc.getWeight() > 0 && isFireble) {
+				outArc.updatePlace();
+	        }
+		} 
+
 	}
 	
 	/**
@@ -98,20 +110,28 @@ public class Transition {
 		return this.id;
 	}
 	
-	public void setInArc(Arc inArc) {
-		this.inArc = inArc;
+	public void setInArcs(ArrayList<Arc> inArcs) {
+		this.inArcs = inArcs;
 	}
 	
-	public void setOutArc(Arc outArc) {
-		this.outArc = outArc;
+	public void setOutArcs(ArrayList<Arc> outArcs) {
+		this.outArcs = outArcs;
 	}
 	
-	public Arc getInArc() {
-		return this.inArc;
+	public void addInArc(Arc inArc) {
+		this.inArcs.add(inArc);
 	}
 	
-	public Arc getOutArc() {
-		return this.outArc;
+	public void addOutArc(Arc outArc) {
+		this.outArcs.add(outArc);
+	}
+	
+	public ArrayList<Arc> getInArcs() {
+		return this.inArcs;
+	}
+	
+	public ArrayList<Arc> getOutArcs() {
+		return this.outArcs;
 	}
 
 	/**
@@ -126,20 +146,6 @@ public class Transition {
 	 */
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the PetriNetwork
-	 */
-	public PetriNetwork getPn() {
-		return pn;
-	}
-
-	/**
-	 * @param pn the PetriNetwork to set
-	 */
-	public void setPn(PetriNetwork pn) {
-		this.pn = pn;
 	}
 	
 }

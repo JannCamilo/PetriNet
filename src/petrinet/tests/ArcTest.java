@@ -13,7 +13,7 @@ import petrinet.exceptions.ExistingObjectException;
 import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
 
-class PetriNetworkTest {
+class ArcTest {
 
 	@Test
 	void ArcConstructorTest() {
@@ -176,6 +176,43 @@ class PetriNetworkTest {
 	    assertThrows(NoExistingObjectException.class, () -> {arc.getEnd();});
 
 	}
+	
+	@Test
+	void getStartPlaceTest() throws ExistingObjectException, NoExistingObjectException {
+		Arc arc = new Arc();
+		Place place = new Place();
+		
+		arc.setStart(place);
+		Place p = (Place) arc.getStart();
+	}
+	
+	@Test
+	void getStartTransitionTest() throws ExistingObjectException, NoExistingObjectException {
+		Arc arc = new Arc();
+		Transition place = new Transition();
+		
+		arc.setStart(place);
+		Transition t = (Transition) arc.getStart();
+	}
+	
+	@Test
+	void getEndPlaceTest() throws ExistingObjectException, NoExistingObjectException {
+		Arc arc = new Arc();
+		Place place = new Place();
+		
+		arc.setEnd(place);
+		Place p = (Place) arc.getEnd();
+	}
+	
+	@Test
+	void getEndTransitionTest() throws ExistingObjectException, NoExistingObjectException {
+		Arc arc = new Arc();
+		Transition place = new Transition();
+		
+		arc.setEnd(place);
+		Transition t = (Transition) arc.getEnd();
+	}
+	
 }
 
 
