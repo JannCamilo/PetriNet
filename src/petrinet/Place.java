@@ -11,8 +11,7 @@ public class Place {
 	private int nbTokens; // Number of tokens in this place.
 	private Arc inArc;
 	private Arc outArc;
-	private String id;
-	private PetriNetwork pn;
+	private String id = "";
 	
 	/**
 	 * Constructs a new Place with a specified initial number of tokens and associated arcs.
@@ -96,19 +95,5 @@ public class Place {
 	 */
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the pn
-	 */
-	public PetriNetwork getPn() {
-		return pn;
-	}
-
-	/**
-	 * @param pn the pn to set
-	 */
-	public void setPn(PetriNetwork pn) {
-		this.pn = pn;
 	}
 }

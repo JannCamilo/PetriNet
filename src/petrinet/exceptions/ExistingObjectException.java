@@ -6,8 +6,5 @@ public class ExistingObjectException extends Exception{
 	
 	public ExistingObjectException() {}
 
-	public ExistingObjectException(String message){
-        super(message);
-    }
 }
 

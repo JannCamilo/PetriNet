@@ -1,6 +1,7 @@
 package petrinet;
 
 import petrinet.exceptions.NegativeTokenInsertedException;
+import petrinet.exceptions.NoExistingObjectException;
 
 /**
  * The 'IPetriNetwork' interface defines the methods that a Petri net network should implement.
@@ -10,8 +11,9 @@ public interface IPetriNetwork {
 	
 	/**
 	 * Fires all fireable transitions in the Petri network.
+	 * @throws NoExistingObjectException 
 	 */
-	public void fireAll();
+	public void fireAll() throws NoExistingObjectException;
 	
 	/**
 	 * Adds a new place to the Petri network.
@@ -52,7 +54,7 @@ public interface IPetriNetwork {
 	/**
 	 * Fires a specific transition in the Petri network.
 	 * @param transition The transition to be fired.
-	 * @throws NegativeTokenInsertedException
+	 * @throws NoExistingObjectException 
 	 */
-	public void fireTransition(Transition transition);
+	public void fireTransition(Transition transition) throws NoExistingObjectException;
 }

@@ -156,9 +156,9 @@ class ArcTest {
 	void getId() {
 		Arc arc = new Arc();
 		
-		arc.setId("P_1");
+		arc.setId("A_1");
 		
-		assertEquals(arc.getId(), "P_1");
+		assertEquals(arc.getId(), "A_1");
 	}
 	
 	@Test
