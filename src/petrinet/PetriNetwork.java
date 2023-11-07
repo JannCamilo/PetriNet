@@ -134,7 +134,8 @@ public class PetriNetwork implements IPetriNetwork {
 	 */
 	public void setTransiions(ArrayList<Transition> transitions) {
 		this.transitions = transitions;
-	}	
+	}
+
 	/**
 	 * Retrieves the list of arcs in the Petri network.
 	 * @return The list of arcs.

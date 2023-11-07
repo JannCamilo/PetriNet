@@ -15,6 +15,7 @@ public class Transition {
 	private ArrayList<Arc> inArcs = new ArrayList<Arc>();
 	private ArrayList<Arc> outArcs= new ArrayList<Arc>();
 	
+	// Unique identifier for this transition.
 	private String id;
 	
 	/**
@@ -86,14 +87,48 @@ public class Transition {
 	}
 	
 	/**
-	 * @return the id
+	 * Sets the incoming arc connected to this transition.
+	 * @param inArc The incoming arc.
+	 */
+	public void setInArc(Arc inArc) {
+		this.inArc = inArc;
+	}
+	
+	/**
+	 * Sets the outgoing arc connected to this transition.
+	 * @param outArc The outgoing arc.
+	 */
+	public void setOutArc(Arc outArc) {
+		this.outArc = outArc;
+	}
+	
+	/**
+	 * Retrieves the incoming arc connected to this transition.
+	 * @return The incoming arc.
+	 */
+	public Arc getInArc() {
+		return this.inArc;
+	}
+	
+	/**
+	 * Retrieves the outgoing arc connected to this transition.
+	 * @return The outgoing arc.
+	 */
+	public Arc getOutArc() {
+		return this.outArc;
+	}
+
+	/**
+	 * Retrieves the unique identifier of the transition.
+	 * @return The identifier of the transition.
 	 */
 	public String getId() {
 		return this.id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * Sets the unique identifier for the transition.
+	 * @param id The identifier to be set.
 	 */
 	public void setId(String id) {
 		this.id = id;

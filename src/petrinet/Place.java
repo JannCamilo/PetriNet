@@ -16,29 +16,27 @@ public class Place {
 	/**
 	 * Constructs a new Place with a specified initial number of tokens and associated arcs.
 	 * @param nbTokens The initial number of tokens in the place.
-	 * @param arcs A list of arcs connected to this place.
+	 * @param inArc The incoming arc connected to this place.
+	 * @param outArc The outgoing arc connected to this place.
+	 * @throws NegativeTokenInsertedException Thrown if nbTokens is less than 0.
 	 */	
 	public Place(int nbTokens, Arc inArc, Arc outArc) throws NegativeTokenInsertedException{
 		if (nbTokens < 0){
-			throw new NegativeTokenInsertedException("Not is posible a number of thokens inferior to 0");
+			throw new NegativeTokenInsertedException("The number of tokens cannot be less than 0");
 		}
 		this.nbTokens = nbTokens;
 		this.inArc = inArc;
 		this.outArc = outArc;
 	}
 	
-	public Place() {
-		this.nbTokens = 0; // Number of tokens for default is 0
-	};
-	
 	/**
 	 * Constructs a new Place with a specified initial number of tokens.
-	 * @param nbTokens The initial number of tokens in the place.
-	 * @throws NegativeTokenInsertedException
+	 * @param nbTokens The number of tokens to initialize the Place with.
+	 * @throws NegativeTokenInsertedException Thrown if nbTokens is less than 0.
 	 */
 	public Place(int nbTokens) throws NegativeTokenInsertedException {
 		if (nbTokens < 0){
-			throw new NegativeTokenInsertedException("The number of thokens can not be inferior to 0");
+			throw new NegativeTokenInsertedException("The number of tokens cannot be less than 0");
 		}
 		this.nbTokens = nbTokens;
 	}
@@ -67,10 +65,18 @@ public class Place {
 		this.outArc = outArc;
 	}
 	
+	/**
+	 * Retrieves the incoming arc connected to this place.
+	 * @return The incoming arc.
+	 */
 	public Arc getInArc() {
 		return this.inArc;
 	}
 	
+	/**
+	 * Retrieves the outgoing arc connected to this place.
+	 * @return The outgoing arc.
+	 */
 	public Arc getOutArc() {
 		return this.outArc;
 	}
@@ -84,14 +90,16 @@ public class Place {
 	}
 
 	/**
-	 * @return the id
+	 * Retrieves the unique identifier of the place.
+	 * @return The identifier of the place.
 	 */
 	public String getId() {
 		return this.id;
 	}
 
 	/**
-	 * @param id the id to set
+	 * Sets the unique identifier for the place.
+	 * @param id The identifier to be set.
 	 */
 	public void setId(String id) {
 		this.id = id;
