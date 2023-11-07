@@ -12,7 +12,7 @@ public class ZeroArc extends Arc {
 	 * @param transition The Transition connected to this ZeroArc.
 	 */
 	public ZeroArc(Place place, Transition transition) {
-		super(place, transition);
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -21,7 +21,7 @@ public class ZeroArc extends Arc {
 	 * @return Always false.
 	 */	
 	public boolean isActive() {
-		return this.isActive;
+		return false;
 	}
 
 }

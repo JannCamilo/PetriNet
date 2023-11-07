@@ -3,6 +3,9 @@ package petrinet;
 import java.util.ArrayList;
 import java.util.List;
 
+import petrinet.exceptions.NegativeTokenInsertedException;
+import petrinet.exceptions.NoExistingObjectException;
+
 /**
  * The 'PetriNetwork' class represents a Petri net with places, transitions, and arcs.
  * It implements the IPetriNetwork interface, providing methods to manipulate and analyze the network.
@@ -13,7 +16,7 @@ public class PetriNetwork implements IPetriNetwork {
 	private ArrayList<Transition> transitions = new ArrayList<Transition>();
 	private ArrayList<Arc> arcs = new ArrayList<Arc>();
 	
-	private int placePosition = 1;
+	protected int placePosition = 1;
 	private int transitionPosition = 1;
 	private int arcPosition = 1;
 	
@@ -46,10 +49,10 @@ public class PetriNetwork implements IPetriNetwork {
 	public PetriNetwork() {}
 
 	@Override
-	public void fireAll() {
+	public void fireAll() throws NoExistingObjectException {
 		// TODO Auto-generated method stub
         for (Transition t : this.transitions) {
-            t.fire();
+        	t.fire();
         }		
 	}
 
@@ -97,17 +100,8 @@ public class PetriNetwork implements IPetriNetwork {
 	}
 
 	@Override
-	public void fireTransition(Transition transition) {
-		// TODO Auto-generated method stub
-        //if (transition == null) throw new NegativeTokenInsertedException("Error: the transition don't exist");
-
-		if (transition.fireable()){
-			transition.fire();
-			System.out.println(transition.getId() + " fired");
-		}else {
-            System.out.println(transition.getId() + " can't fire");
-            System.out.println("------");
-        }
+	public void fireTransition(Transition transition) throws NoExistingObjectException {
+		transition.fire();
 	}
 	
 	/**
@@ -181,22 +175,35 @@ public class PetriNetwork implements IPetriNetwork {
 		
 		for (Transition t : this.transitions) {
 			
-			Arc inArc = t.getInArc();
-			Arc outArc = t.getOutArc();
+			ArrayList<Arc> inArcs = t.getInArcs();
+			ArrayList<Arc> outArcs = t.getOutArcs();
 			
-			res += ((inArc != null ? inArc.toString() + this.s : "") + t.toString() + (outArc != null ? this.s + outArc.toString() : ""));
-			res += "\n";
+			for (Arc inArc : inArcs) {
+				for (Arc outArc: outArcs) {
+					res += ((inArc != null ? inArc.toString() + this.s : "") + t.toString() + (outArc != null ? this.s + outArc.toString() : ""));
+					res += "\n";
+				}
+			}
+
 		}
 		
 		res += "-----------Arcs----------- \n";
 		
 		for (Arc a : this.arcs) {
 						
-			Object start = a.getStart();
-			Object end = a.getEnd();
-						
-			res += ((start != null ? start.toString() + this.s : "") + a.toString() + (end != null ? this.s + end.toString() : ""));
-			res += "\n";
+			Object start;
+			try {
+				start = a.getStart();
+				Object end = a.getEnd();
+				
+				res += ((start != null ? start.toString() + this.s : "") + a.toString() + (end != null ? this.s + end.toString() : ""));
+				res += "\n";
+				
+			} catch (NoExistingObjectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+					
 		}
 		
 		return res;
@@ -210,24 +217,10 @@ public class PetriNetwork implements IPetriNetwork {
 	}
 
 	/**
-	 * @param placePosition the placePosition to set
-	 */
-	public void setPlacePosition(int placePosition) {
-		this.placePosition = placePosition;
-	}
-
-	/**
 	 * @return the transitionPosition
 	 */
 	public int getTransitionPosition() {
 		return transitionPosition;
-	}
-
-	/**
-	 * @param transitionPosition the transitionPosition to set
-	 */
-	public void setTransitionPosition(int transitionPosition) {
-		this.transitionPosition = transitionPosition;
 	}
 
 	/**
@@ -236,65 +229,61 @@ public class PetriNetwork implements IPetriNetwork {
 	public int getArcPosition() {
 		return arcPosition;
 	}
-
-	/**
-	 * @param arcPosition the arcPosition to set
-	 */
-	public void setArcPosition(int arcPosition) {
-		this.arcPosition = arcPosition;
-	}
 	
 	public static void main(String[] args) {
-		try {
-			// create every element of the network
-			Place p1 = new Place(3);
-			Arc a1 = new Arc();
-			Transition t1 = new Transition();
-			Arc a2 = new Arc();
-			Place p2 = new Place(2);
-			
-			// Connect each element of the petri network
-			p1.setOutArc(a1);
-			a1.setStart(p1);
-			a1.setEnd(t1);
-			t1.setInArc(a1);
-			t1.setOutArc(a2);
-			a2.setStart(t1);
-			a2.setEnd(p2);
-			p2.setInArc(a2);
-			a1.setWeight(2);	
-			a2.setWeight(5);
-			
-			// Creates a list for each network element
-			ArrayList<Place> places = new ArrayList<Place>();
-			ArrayList<Transition> transitions = new ArrayList<Transition>();
-			ArrayList<Arc> arcs = new ArrayList<Arc>();
-			
-			// Add the elements to the list and the network
-			places.add(p1);
-			places.add(p2);
-			transitions.add(t1);
-			arcs.add(a1);
-			arcs.add(a2);
-			PetriNetwork pn1 = new PetriNetwork(places, transitions, arcs);
-			System.out.println(pn1.toString());
-
-			System.out.println("\n------Before to do Fire------");
-			System.out.println("Number of thokens in "+ p1 + " : " + p1.getNbTokens());
-			System.out.println("Number of thokens in "+ p2 + " : " + p2.getNbTokens());
-
-			// Do Fire
-			t1.fire(); 
-
-			System.out.println("\n------After to do Fire-------");
-			System.out.println("Number of thokens in "+ p1 + " : " + p1.getNbTokens());
-			System.out.println("Number of thokens in "+ p2 + " : " + p2.getNbTokens());
-
-			//Try to create a new place with a negative number of tokens
-			Place p3 = new Place(-5);			
-		} catch (NegativeTokenInsertedException e) {
-			System.out.println("\nError: " + e.getMessage());
-		}
+//		try {
+//			//PetriNetwork pn1 = new PetriNetwork();
+//			
+//			Place p1 = new Place(2);
+//			Arc a1 = new Arc();
+//			Transition t1 = new Transition();
+//			Arc a2 = new Arc();
+//			Place p2 = new Place(2);
+//			
+//			p1.setOutArc(a1);
+//			a1.setStart(p1);
+//			a1.setEnd(t1);
+//			t1.addInArc(a1);
+//			t1.addOutArc(a2);
+//			a2.setStart(t1);
+//			a2.setEnd(p2);
+//			p2.setInArc(a2);
+//			a1.setWeight(2);	
+//			a2.setWeight(2);
+//			
+//			/*pn1.addPlace(p1);
+//			pn1.addArc(a1);
+//			pn1.addTransition(t1);
+//			pn1.addArc(a2);		
+//			pn1.addPlace(p2);
+//			
+//			System.out.println(pn1.toString());*/
+//
+//			ArrayList<Place> places = new ArrayList<Place>();
+//			ArrayList<Transition> transitions = new ArrayList<Transition>();
+//			ArrayList<Arc> arcs = new ArrayList<Arc>();
+//
+//			places.add(p1);
+//			places.add(p2);
+//			transitions.add(t1);
+//			arcs.add(a1);
+//			arcs.add(a2);
+//			PetriNetwork PN1 = new PetriNetwork(places, transitions, arcs);
+//			System.out.println(PN1.toString());
+//
+//			System.out.println("\n------Before to do Fire------");
+//			System.out.println("Number of tokens in "+ p1 + " : " + p1.getNbTokens());
+//			System.out.println("Number of tokens in "+ p2 + " : " + p2.getNbTokens());
+//
+//			t1.fire(); // Do Fire
+//			System.out.println("\n------After to do Fire-------");
+//			System.out.println("Number of tokens in "+ p1 + " : " + p1.getNbTokens());
+//			System.out.println("Number of tokens in "+ p2 + " : " + p2.getNbTokens());
+//			Place p3 = new Place(-5);
+//			
+//		} catch (Exception e) {
+//			System.out.println("\nError: " + e.getMessage());
+//		}
 	}
 }
 	

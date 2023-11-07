@@ -12,7 +12,7 @@ public class DrainerArc extends Arc {
 	 * @param transition The Transition connected to this DrainerArc.
 	 */
 	public DrainerArc(Place place, Transition transition) {
-		super(place, transition);
+		super();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -21,7 +21,7 @@ public class DrainerArc extends Arc {
 	 * @return Always false.
 	 */	
 	public boolean isActive() {
-		return this.isActive;
+		return false;
 	}	
 	
 	/**
