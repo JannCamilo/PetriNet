@@ -199,8 +199,6 @@ public class PetriNetwork implements IPetriNetwork {
 				res += "\n";
 				
 			} catch (NoExistingObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 					
 		}
