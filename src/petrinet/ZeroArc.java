@@ -8,12 +8,9 @@ public class ZeroArc extends Arc {
 	
 	/**
 	 * Constructs a new ZeroArc with specified Place and Transition.
-	 * @param place The Place connected to this ZeroArc.
-	 * @param transition The Transition connected to this ZeroArc.
 	 */
-	public ZeroArc(Place place, Transition transition) {
+	public ZeroArc() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

@@ -3,7 +3,6 @@ package petrinet;
 import java.util.ArrayList;
 import java.util.List;
 
-import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
 
 /**
