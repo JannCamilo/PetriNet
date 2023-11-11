@@ -8,12 +8,9 @@ public class DrainerArc extends Arc {
 	
 	/**
 	 * Constructs a new DrainerArc with specified Place and Transition.
-	 * @param place The Place connected to this DrainerArc.
-	 * @param transition The Transition connected to this DrainerArc.
 	 */
-	public DrainerArc(Place place, Transition transition) {
+	public DrainerArc() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

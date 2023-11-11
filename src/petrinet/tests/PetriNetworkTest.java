@@ -164,6 +164,8 @@ class PetriNetworkTest {
 				+ "P_1 -- A_1 -- T_1\n"
 				+ "P_2 -- A_2 -- T_1\n"
 				+ "T_1 -- A_3 -- P_2";
+		
+		System.out.println(pn);
 	}
 
 }

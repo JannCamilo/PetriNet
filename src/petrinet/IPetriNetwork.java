@@ -1,6 +1,5 @@
 package petrinet;
 
-import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
 
 /**

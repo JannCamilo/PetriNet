@@ -3,7 +3,6 @@ package petrinet;
 import java.util.ArrayList;
 import java.util.List;
 
-import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
 
 /**
@@ -200,8 +199,6 @@ public class PetriNetwork implements IPetriNetwork {
 				res += "\n";
 				
 			} catch (NoExistingObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 					
 		}
