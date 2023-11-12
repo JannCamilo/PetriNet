@@ -3,6 +3,9 @@ package petrinet;
 import java.util.ArrayList;
 import java.util.List;
 
+import petrinet.exceptions.ExistingArcException;
+import petrinet.exceptions.ExistingObjectException;
+import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
 
 /**
@@ -26,8 +29,10 @@ public class PetriNetwork implements IPetriNetwork {
 	 * @param places The list of places in the Petri network.
 	 * @param transitions The list of transitions in the Petri network.
 	 * @param arcs The list of arcs in the Petri network.
+	 * @throws NoExistingObjectException
+	 * @throws NegativeTokenInsertedException
 	 */
-	public PetriNetwork(ArrayList<Place> places, ArrayList<Transition> transitions, ArrayList<Arc> arcs) {
+	public PetriNetwork(ArrayList<Place> places, ArrayList<Transition> transitions, ArrayList<Arc> arcs) throws NegativeTokenInsertedException, ExistingArcException, NoExistingObjectException {
 		
 		for (Place p : places) {
 			  this.addPlace(p);
@@ -63,12 +68,17 @@ public class PetriNetwork implements IPetriNetwork {
 	}
 
 	@Override
-	public void addArc(Arc arc) {
-		arc.setId("A_"+this.arcPosition);
+	public void addArc(Arc arc) throws NegativeTokenInsertedException, ExistingArcException, NoExistingObjectException {
+		arc.setId("A_" + this.arcPosition);
 		this.arcPosition++;
-		this.arcs.add(arc);
 		
-	}
+		try {
+			arc.mergeArc(this.arcs); // Check if an Arc already exists between the same places and merge if necessary
+			this.arcs.add(arc);
+		} catch (ExistingArcException e) {
+			System.err.println("\nError: " + e.getMessage());
+    }
+}
 
 	@Override
 	public void addTransition(Transition transition) {
@@ -227,59 +237,53 @@ public class PetriNetwork implements IPetriNetwork {
 	}
 	
 	public static void main(String[] args) {
-//		try {
-//			//PetriNetwork pn1 = new PetriNetwork();
-//			
-//			Place p1 = new Place(2);
-//			Arc a1 = new Arc();
-//			Transition t1 = new Transition();
-//			Arc a2 = new Arc();
-//			Place p2 = new Place(2);
-//			
-//			p1.setOutArc(a1);
-//			a1.setStart(p1);
-//			a1.setEnd(t1);
-//			t1.addInArc(a1);
-//			t1.addOutArc(a2);
-//			a2.setStart(t1);
-//			a2.setEnd(p2);
-//			p2.setInArc(a2);
-//			a1.setWeight(2);	
-//			a2.setWeight(2);
-//			
-//			/*pn1.addPlace(p1);
-//			pn1.addArc(a1);
-//			pn1.addTransition(t1);
-//			pn1.addArc(a2);		
-//			pn1.addPlace(p2);
-//			
-//			System.out.println(pn1.toString());*/
-//
-//			ArrayList<Place> places = new ArrayList<Place>();
-//			ArrayList<Transition> transitions = new ArrayList<Transition>();
-//			ArrayList<Arc> arcs = new ArrayList<Arc>();
-//
-//			places.add(p1);
-//			places.add(p2);
-//			transitions.add(t1);
-//			arcs.add(a1);
-//			arcs.add(a2);
-//			PetriNetwork PN1 = new PetriNetwork(places, transitions, arcs);
-//			System.out.println(PN1.toString());
-//
-//			System.out.println("\n------Before to do Fire------");
-//			System.out.println("Number of tokens in "+ p1 + " : " + p1.getNbTokens());
-//			System.out.println("Number of tokens in "+ p2 + " : " + p2.getNbTokens());
-//
-//			t1.fire(); // Do Fire
-//			System.out.println("\n------After to do Fire-------");
-//			System.out.println("Number of tokens in "+ p1 + " : " + p1.getNbTokens());
-//			System.out.println("Number of tokens in "+ p2 + " : " + p2.getNbTokens());
-//			Place p3 = new Place(-5);
-//			
-//		} catch (Exception e) {
-//			System.out.println("\nError: " + e.getMessage());
-//		}
+		try {
+			PetriNetwork pn1 = new PetriNetwork();
+			
+			Place p1 = new Place(2);
+			Arc a1 = new Arc();
+			Transition t1 = new Transition();
+			Arc a2 = new Arc();
+			Place p2 = new Place(2);
+			
+			p1.setOutArc(a1);
+			a1.setStart(p1);
+			a1.setEnd(t1);
+			t1.addInArc(a1);
+			t1.addOutArc(a2);
+			a2.setStart(t1);
+			a2.setEnd(p2);
+			p2.setInArc(a2);
+			a1.setWeight(2);	
+			a2.setWeight(2);
+			
+			Arc a3 = new Arc();
+			a3.setStart(t1);
+			a3.setEnd(p2);
+			a3.setWeight(2);			
+
+			pn1.addPlace(p1);
+			pn1.addArc(a1);
+			pn1.addTransition(t1);
+			pn1.addArc(a2);		
+			pn1.addPlace(p2);
+			pn1.addArc(a3);
+
+			System.out.println(pn1.toString());
+
+			System.out.println("\n------Before to do Fire------");
+			System.out.println("Number of tokens in "+ p1 + " : " + p1.getNbTokens());
+			System.out.println("Number of tokens in "+ p2 + " : " + p2.getNbTokens());
+
+			t1.fire(); // Do Fire
+			System.out.println("\n------After to do Fire-------");
+			System.out.println("Number of tokens in "+ p1 + " : " + p1.getNbTokens());
+			System.out.println("Number of tokens in "+ p2 + " : " + p2.getNbTokens());
+			//Place p3 = new Place(-5);
+
+		} catch (Exception e) {
+			System.out.println("\nError: " + e.getMessage());
+		}
 	}
 }
 	

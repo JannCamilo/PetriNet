@@ -1,5 +1,8 @@
 package petrinet;
 
+import java.util.List;
+
+import petrinet.exceptions.ExistingArcException;
 import petrinet.exceptions.ExistingObjectException;
 import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
@@ -125,6 +128,26 @@ public class Arc {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
+	/**
+     * Merge the current Arc with an existing Arc if one already exists between the same places.
+     * If merging, update the weight of the existing Arc.
+	 * @throws NegativeTokenInsertedException
+	 * @throws NoExistingObjectException
+     *
+     * @throws ExistingObjectException When there is already an Arc between the same places.
+     */
+    public void mergeArc(List<Arc> allArcs) throws ExistingArcException, NegativeTokenInsertedException, NoExistingObjectException {
+        if (startPlace != null && endTransition != null || startTransition != null && endPlace != null) {
+            for (Arc existingArc : allArcs) {
+                if ((existingArc.getStart() == startPlace && existingArc.getEnd() == endTransition) ||
+				(existingArc.getStart() == startTransition && existingArc.getEnd() == endPlace)) {
+                    // Found an existing Arc between the same places
+                    existingArc.setWeight(existingArc.getWeight() + this.weight);
+                    throw new ExistingArcException("Arc already exists, merge between "+ existingArc.toString() + " and " + this.id);
+                }
+            }
+        }
+    }
 }
 

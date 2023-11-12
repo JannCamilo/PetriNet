@@ -1,5 +1,7 @@
 package petrinet;
 
+import petrinet.exceptions.ExistingArcException;
+import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
 
 /**
@@ -23,8 +25,11 @@ public interface IPetriNetwork {
 	/**
 	 * Adds a new arc to the Petri network.
 	 * @param arc The arc to be added.
+	 * @throws NoExistingObjectException
+	 * @throws NegativeTokenInsertedException
+	 * @throws ExistingArcException
 	 */
-	public void addArc(Arc arc);
+	public void addArc(Arc arc) throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException;
 	
 	/**
 	 * Adds a new transition to the Petri network.

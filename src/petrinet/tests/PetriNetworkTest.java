@@ -12,6 +12,7 @@ import petrinet.Arc;
 import petrinet.PetriNetwork;
 import petrinet.Place;
 import petrinet.Transition;
+import petrinet.exceptions.ExistingArcException;
 import petrinet.exceptions.ExistingObjectException;
 import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
@@ -69,13 +70,13 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	void PetriNetworkConstructorTest() {
+	void PetriNetworkConstructorTest() throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);
 		PetriNetwork pn1 = new PetriNetwork();
 	}
 	
 	@Test
-	void deletePlaceTest() {
+	void deletePlaceTest() throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);
 		
 		Place p4 = new Place();
@@ -90,7 +91,7 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	void deleteArcTest() {
+	void deleteArcTest() throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);
 		
 		Arc arc4 = new Arc();
@@ -105,7 +106,7 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	void deleteTransitionTest() {
+	void deleteTransitionTest() throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);
 		
 		Transition t2 = new Transition();
@@ -128,7 +129,7 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	void fireTransitionTest() throws NoExistingObjectException {
+	void fireTransitionTest() throws NoExistingObjectException, NegativeTokenInsertedException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);
 		Transition t1 = pn.getTransitions().get(0);
 				
@@ -136,13 +137,13 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	void fireAllTransitionTest() throws NoExistingObjectException {
+	void fireAllTransitionTest() throws NoExistingObjectException, NegativeTokenInsertedException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);				
 		pn.fireAll();
 	}
 	
 	@Test
-	void getPositionTest() {
+	void getPositionTest() throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);				
 		assertEquals(pn.getPlacePosition(), 4);
 		assertEquals(pn.getArcPosition(), 4);
@@ -150,7 +151,7 @@ class PetriNetworkTest {
 	}
 	
 	@Test
-	void toStringTest() {
+	void toStringTest() throws NegativeTokenInsertedException, NoExistingObjectException, ExistingArcException {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);				
 		
 		String res = "----------Places---------- \n"

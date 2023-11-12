@@ -2,13 +2,13 @@ package petrinet.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import petrinet.Arc;
 import petrinet.PetriNetwork;
 import petrinet.Place;
 import petrinet.Transition;
+import petrinet.exceptions.ExistingArcException;
 import petrinet.exceptions.ExistingObjectException;
 import petrinet.exceptions.NegativeTokenInsertedException;
 import petrinet.exceptions.NoExistingObjectException;
@@ -103,7 +103,7 @@ class ArcTest {
 	}	
 
 	@Test
-	void toStringTest() {
+	void toStringTest() throws NegativeTokenInsertedException, ExistingArcException, NoExistingObjectException {
 		PetriNetwork pn1 = new PetriNetwork();
 		Arc arc = new Arc();
 		
