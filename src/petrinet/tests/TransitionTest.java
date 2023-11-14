@@ -52,10 +52,12 @@ class TransitionTest {
 	
 	@Test
 	void toStringTest() {
-		PetriNetwork pn = new PetriNetwork();
+		
+		ArrayList<Transition> transitions = new ArrayList<Transition>();
 		Transition t = new Transition();
-
-		pn.addTransition(t);
+		transitions.add(t);
+		
+		PetriNetwork pn = new PetriNetwork(new ArrayList<Place>(), transitions, new ArrayList<Arc>());
 		
 		assertEquals(t.getId(), "T_1");
 		assertEquals(t.toString(), "T_1");

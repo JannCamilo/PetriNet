@@ -101,18 +101,6 @@ class ArcTest {
 		t1.setId("T_1");
 		arc.setStart(t1);
 	}	
-
-	@Test
-	void toStringTest() {
-		PetriNetwork pn1 = new PetriNetwork();
-		Arc arc = new Arc();
-		
-		assertEquals(arc.toString(), "");
-		
-		pn1.addArc(arc);
-		
-		assertEquals(arc.toString(), "A_1");
-	}
 	
 	@Test
 	void updatePlaceTest() throws ExistingObjectException {

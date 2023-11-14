@@ -2,11 +2,14 @@ package petrinet.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import petrinet.Arc;
 import petrinet.PetriNetwork;
 import petrinet.Place;
+import petrinet.Transition;
 import petrinet.exceptions.ExistingObjectException;
 import petrinet.exceptions.NegativeTokenInsertedException;
 
@@ -52,12 +55,13 @@ class PlaceTest {
 	
 	@Test
 	void toStringTest() {
-		PetriNetwork pn1 = new PetriNetwork();
+		ArrayList<Place> places = new ArrayList<Place>();
 		Place place = new Place();
+		places.add(place);
 		
 		assertEquals(place.toString(), "");
 		
-		pn1.addPlace(place);
+		PetriNetwork pn = new PetriNetwork(places, new ArrayList<Transition>(), new ArrayList<Arc>());
 		
 		assertEquals(place.toString(), "P_1");
 	}

@@ -11,9 +11,9 @@ import petrinet.exceptions.NoExistingObjectException;
  */
 public class PetriNetwork implements IPetriNetwork {
 	
-	private ArrayList<Place> places = new ArrayList<Place>();
-	private ArrayList<Transition> transitions = new ArrayList<Transition>();
-	private ArrayList<Arc> arcs = new ArrayList<Arc>();
+	private final ArrayList<Place> places = new ArrayList<Place>();
+	private final ArrayList<Transition> transitions = new ArrayList<Transition>();
+	private final ArrayList<Arc> arcs = new ArrayList<Arc>();
 	
 	protected int placePosition = 1;
 	private int transitionPosition = 1;
@@ -41,11 +41,6 @@ public class PetriNetwork implements IPetriNetwork {
 			  this.addArc(a);
 		}
 	}
-	
-	/**
-	 * Constructs a new empty PetriNetwork.
-	 */
-	public PetriNetwork() {}
 
 	@Override
 	public void fireAll() throws NoExistingObjectException {
@@ -112,42 +107,19 @@ public class PetriNetwork implements IPetriNetwork {
 	}
 	
 	/**
-	 * Sets the list of places in the Petri network.
-	 * @param places The list of places to be set.
-	 */
-	public void setPlaces(ArrayList<Place> places) {
-		this.places = places;	
-	}
-	
-	/**
 	 * Retrieves the list of transitions in the Petri network.
 	 * @return The list of transitions.
 	 */
 	public List<Transition> getTransitions() {
 		return this.transitions;
 	}	
-	
-	/**
-	 * Sets the list of transitions in the Petri network.
-	 * @param transitions The list of transitions to be set.
-	 */
-	public void setTransiions(ArrayList<Transition> transitions) {
-		this.transitions = transitions;
-	}	
+		
 	/**
 	 * Retrieves the list of arcs in the Petri network.
 	 * @return The list of arcs.
 	 */
 	public List<Arc> getArcs() {
 		return this.arcs;
-	}
-	
-	/**
-	 * Sets the list of arcs in the Petri network.
-	 * @param arcs set the arcs inside the Petri Network.
-	 */
-	public void setArcs(ArrayList<Arc> arcs) {
-		this.arcs = arcs;
 	}
 	
 	/**

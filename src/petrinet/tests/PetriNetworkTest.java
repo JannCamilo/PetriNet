@@ -71,7 +71,6 @@ class PetriNetworkTest {
 	@Test
 	void PetriNetworkConstructorTest() {
 		PetriNetwork pn = new PetriNetwork(this.places, this.transitions, this.arcs);
-		PetriNetwork pn1 = new PetriNetwork();
 	}
 	
 	@Test
@@ -117,14 +116,6 @@ class PetriNetworkTest {
 		pn.deleteTransition(t2);
 				
 		assertEquals(pn.getTransitions().size(), 1);
-	}
-	
-	@Test
-	void setTest() {
-		PetriNetwork pn = new PetriNetwork();
-		pn.setPlaces(this.places);
-		pn.setArcs(this.arcs);
-		pn.setTransiions(this.transitions);
 	}
 	
 	@Test
