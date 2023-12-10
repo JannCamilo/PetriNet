@@ -3,9 +3,10 @@
 The PetriNetwork class is a Java implementation representing a Petri net, complete with places, transitions, and arcs. It adheres to the IPetriNetwork interface, offering a suite of methods for managing and analyzing the network.
 
 #### 📖 Documentation:
-- [UML Diagrams explanation](uml.md)
+- [UML Diagrams explanation](UML.md)
 - [Functions and Classes explanation](classes.md)
 - [Usage example](usage.md)
+- [Sequence diagram](sequencediagram.md)
 
 ## Table of Contents
 - Overview
